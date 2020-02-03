@@ -1,0 +1,55 @@
+import random
+
+class bank_account:
+    address = "kadapa"
+    
+    def __init__(self,first_name,last_name,aadhar_card,mobile_num):
+        self.first_name= first_name
+        self.last_name= last_name
+        self.aadhar_card= aadhar_card
+        self.mobile_num= mobile_num
+        
+    def create_account(self):
+        account_numbers_list=['SK1344477','fk342879','hs342762','we298645','ra824639',"KP2148132"]
+        account_number=self.first_name[0].upper()+self.last_name[0].upper()+self.mobile_num[-4:]+self.aadhar_card[:3]
+        global deposit_amount
+        if account_number not in account_numbers_list:
+            deposit_amount= 5000
+            return account_number
+        else:
+            account_number=self.first_name[1].upper()+self.last_name[1].upper()+self.mobile_num[:4]+self.aadhar_card[-3:]
+            deposit_amount= 5000
+            return account_number
+        return account_number
+        
+    def create_pin(self):
+        pin=(random.randint(1000,9999))
+        return pin
+    
+    def change_pin(self):
+        changed_pin=int(input("Please enter the new pin number!"))
+        return changed_pin
+    
+    def withdraw(self, user_input_pin):
+        if self.change_pin() == user_input_pin:
+            withdraw_amount= int(input("Enter withdraw amount:"))
+            if (withdraw_amount) < deposit_amount:
+                if (deposit_amount-withdraw_amount) >= 2000:
+                    balance= deposit_amount- withdraw_amount
+                    print("balance amount is:" + str(balance))
+                    return 'withdraw successfull'
+                else:
+                    return "minimum balance should be 2000"
+            else:
+                return "insuficent funds"
+        else:
+            return "You have entered Incorrect pin! Please enter the correct Pin"
+
+
+account_holder1= bank_account("kiran","palagiri","1324514","8297912148")
+account_number = account_holder1.create_account()
+print(account_number)
+#account_holder1.create_pin()
+#account_holder1.change_pin()
+Total_balnce= account_holder1.withdraw(2345)
+print(Total_balnce)
